@@ -5,15 +5,17 @@ VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MailMeUp", "MailMeUp\MailMeUp.csproj", "{F6EF48D0-2C32-433E-AF1A-9659E4A9BB8E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MailMeUpLib", "MailMeUpLib\MailMeUpLib.csproj", "{BD03CBAE-545D-4C88-AF9E-663B0E721826}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MailMeUpLib", "MailMeUpLib\MailMeUpLib.csproj", "{BD03CBAE-545D-4C88-AF9E-663B0E721826}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dtos", "Dtos\Dtos.csproj", "{4DBED21B-BA05-444B-8A67-C456AB8D5200}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dtos", "Dtos\Dtos.csproj", "{4DBED21B-BA05-444B-8A67-C456AB8D5200}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomExceptions", "CustomExceptions\CustomExceptions.csproj", "{BF929529-65FA-4ABF-88C4-4EB6CB2D5D89}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomExceptions", "CustomExceptions\CustomExceptions.csproj", "{BF929529-65FA-4ABF-88C4-4EB6CB2D5D89}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomHandlers", "CustomHandlers\CustomHandlers.csproj", "{082365B3-AB2E-4420-B6B9-CE9CA3D3EA04}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomHandlers", "CustomHandlers\CustomHandlers.csproj", "{082365B3-AB2E-4420-B6B9-CE9CA3D3EA04}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "Models\Models.csproj", "{B3BCF2F4-8064-4117-A216-0899E5673303}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Models", "Models\Models.csproj", "{B3BCF2F4-8064-4117-A216-0899E5673303}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomValidations", "CustomValidations\CustomValidations.csproj", "{7DAAE3F2-D445-4D2C-A60E-A9158FABA24C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{B3BCF2F4-8064-4117-A216-0899E5673303}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B3BCF2F4-8064-4117-A216-0899E5673303}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B3BCF2F4-8064-4117-A216-0899E5673303}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7DAAE3F2-D445-4D2C-A60E-A9158FABA24C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7DAAE3F2-D445-4D2C-A60E-A9158FABA24C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7DAAE3F2-D445-4D2C-A60E-A9158FABA24C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7DAAE3F2-D445-4D2C-A60E-A9158FABA24C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
