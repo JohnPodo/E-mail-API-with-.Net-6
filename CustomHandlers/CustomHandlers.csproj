@@ -10,6 +10,7 @@
     <ProjectReference Include="..\CustomValidations\CustomValidations.csproj" />
     <ProjectReference Include="..\Dtos\Dtos.csproj" />
     <ProjectReference Include="..\Models\Models.csproj" />
+    <ProjectReference Include="..\Repos\Repos.csproj" />
   </ItemGroup>
 
 </Project>

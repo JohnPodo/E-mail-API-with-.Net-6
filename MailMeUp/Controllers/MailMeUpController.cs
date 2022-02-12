@@ -1,25 +1,29 @@
 ﻿using Dtos;
 using Microsoft.AspNetCore.Mvc;
 using Models.Responses;
+using Newtonsoft.Json;
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace MailMeUp.Controllers
-{
-    [Route("api/[controller]/[action]")]
-    [ApiController]
-    public class MailMeUpController : ControllerBase
+{ 
+    public class MailMeUpController : SuperController
     {
         // GET: api/<MailMeUpController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<IEnumerable<string>> Get()
         {
+            await _LogHandler.WriteToLog("Received Request to send email", Models.Severity.Information);
+            await _LogHandler.WriteToLog($"Request Info --> {JsonConvert.SerializeObject(this.Request.Host, Formatting.Indented)}", Models.Severity.Information);
             return new string[] { "value1", "value2" };
         }
 
         // GET api/<MailMeUpController>/5
         [HttpPost]
-        public ActionResult<EmailResponse> SendEmail(MailDto dto)
+        public async Task<ActionResult<EmailResponse>> SendEmail(MailDto dto)
         {
+            await _LogHandler.WriteToLog("Received Request to send email", Models.Severity.Information);
+            await _LogHandler.WriteToLog($"Request Info --> {JsonConvert.SerializeObject(this.Request,Formatting.Indented)}", Models.Severity.Information);
+            await _LogHandler.WriteToLog($"Dto provides  --> {JsonConvert.SerializeObject(dto, Formatting.Indented)}", Models.Severity.Information);
             if (dto is null)
                 return new BadRequestObjectResult(new EmailResponse() { Success = false, ErrorMessage = "No Data was given" });
             if (dto.To is null)
