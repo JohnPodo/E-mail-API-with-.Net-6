@@ -1,35 +1,86 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Dtos;
+using Microsoft.AspNetCore.Mvc;
+using Models;
+using Models.Responses;
+using Repos;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace MailMeUp.Controllers
 { 
     public class UserMeUpController : SuperController
-    {
-
-        // GET api/<UserMeUpController>/5
+    { 
         [HttpGet("{id}")]
-        public string GetUserById(int id)
+        public async Task<ActionResult<UserResponse>> GetUserById(int id)
         {
-            return "value";
+            var authCheck = await CheckAuth(true);
+            if (authCheck is not null) return authCheck;
+            await WriteRequestInfoToLog(id);
+            var result = await _UserHandler.GetUserById(id);
+            await WriteResponseInfoToLog(result);
+            return Ok(result);
         }
 
-        // POST api/<UserMeUpController>
+        [HttpGet("{session}")]
+        public async Task<ActionResult<UserResponse>> GetUserByActiveSession(Guid session)
+        {
+            var authCheck = await CheckAuth(true);
+            if (authCheck is not null) return authCheck;
+            await WriteRequestInfoToLog(session);
+            var result = await _UserHandler.GetUserByActiveToken(session);
+            await WriteResponseInfoToLog(result);
+            return Ok(result);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<BaseResponse>> DeleteUser(int id)
+        {
+            var authCheck = await CheckAuth(true);
+            if (authCheck is not null) return authCheck;
+            await WriteRequestInfoToLog(id);
+            var result = await _UserHandler.DeleteUser(id);
+            await WriteResponseInfoToLog(result);
+            return Ok(result);
+        }
+
         [HttpPost]
-        public void Post([FromBody] string value)
-        {
+        public async Task<ActionResult<BaseResponse>> RegisterUser(UserDto dto)
+        {  
+            await WriteRequestInfoToLog(dto);
+            var result = await _UserHandler.RegisterUser(dto);
+            await WriteResponseInfoToLog(result);
+            return Ok(result);
         }
 
-        // PUT api/<UserMeUpController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPost]
+        public async Task<ActionResult<BaseResponse>> RegisterAdmin(UserDto dto)
         {
+            var authCheck = await CheckAuth(true);
+            if (authCheck is not null) return authCheck;
+            await WriteRequestInfoToLog(dto);
+            var result = await _UserHandler.RegisterAdmin(dto);
+            await WriteResponseInfoToLog(result);
+            return Ok(result);
         }
 
-        // DELETE api/<UserMeUpController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpPost]
+        public async Task<ActionResult<LoginResponse>> Login(LoginDto dto)
+        {  
+            await WriteRequestInfoToLog(dto);
+            var result = await _UserHandler.Login(dto);
+            await WriteResponseInfoToLog(result);
+            return Ok(result);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<BaseResponse>> ChangePassword(ChangePasswordDto dto)
         {
+            var authCheck1 = await CheckAuth(false);
+            var authCheck2 = await CheckAuth(true);
+            await WriteRequestInfoToLog(dto);
+            var result = await _UserHandler.ChangePassword(dto);
+            await WriteResponseInfoToLog(result);
+            return Ok(result);
         }
     }
 }

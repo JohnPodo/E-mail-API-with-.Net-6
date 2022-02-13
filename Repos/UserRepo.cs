@@ -38,5 +38,25 @@ namespace Repos
             await _DbContext.SaveChangesAsync();
         }
 
+        public async Task<MailMeUpUser> GetUserFromUsername(string username)
+        {
+            var user = await _DbContext.MailMeUpUsers.Where(s => s.Username == username).FirstOrDefaultAsync();
+            return user;
+        }
+
+        public async Task UpdateUser(MailMeUpUser user)
+        {
+            if(user == null) return;
+            if (user.Id == 0) return;
+            var userToModify = await GetUserById(user.Id);
+            userToModify.IsAdmin = user.IsAdmin;
+            userToModify.Password = user.Password;
+            userToModify.Username = user.Username;
+            userToModify.EmailPassword = user.EmailPassword;
+            userToModify.EmailUsername = user.EmailUsername;
+            userToModify.ActiveToken = user.ActiveToken;
+            userToModify.EmailAddress = user.EmailAddress;
+            await _DbContext.SaveChangesAsync();
+        }
     }
 }
