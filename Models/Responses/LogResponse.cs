@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace Models.Responses
 {
-    public class BaseResponse
+    public class LogResponse : BaseResponse
     {
-        public bool Success { get; set; }
-        public string ErrorMessage { get; set; }
+        public List<LogMeUp> Logs { get; set; }
     }
 }

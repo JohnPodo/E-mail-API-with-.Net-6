@@ -12,8 +12,7 @@ namespace MailMeUp.Controllers
         [HttpGet]
         public async Task<IEnumerable<string>> Get()
         {
-            await _LogHandler.WriteToLog("Received Request to send email", Models.Severity.Information);
-            await _LogHandler.WriteToLog($"Request Info --> {JsonConvert.SerializeObject(this.Request.Host, Formatting.Indented)}", Models.Severity.Information);
+            
             return new string[] { "value1", "value2" };
         }
 
@@ -21,9 +20,7 @@ namespace MailMeUp.Controllers
         [HttpPost]
         public async Task<ActionResult<EmailResponse>> SendEmail(MailDto dto)
         {
-            await _LogHandler.WriteToLog("Received Request to send email", Models.Severity.Information);
-            await _LogHandler.WriteToLog($"Request Info --> {JsonConvert.SerializeObject(this.Request,Formatting.Indented)}", Models.Severity.Information);
-            await _LogHandler.WriteToLog($"Dto provides  --> {JsonConvert.SerializeObject(dto, Formatting.Indented)}", Models.Severity.Information);
+            await WriteRequestInfoToLog(dto);
             if (dto is null)
                 return new BadRequestObjectResult(new EmailResponse() { Success = false, ErrorMessage = "No Data was given" });
             if (dto.To is null)

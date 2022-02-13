@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Models
@@ -17,5 +19,9 @@ namespace Models
         public string Message { get; set; }
 
         public DateTime InsertDate { get; set; }
+        [ForeignKey("MailMeUpUser")]
+        public int? MailMeUpUserId { get; set; }
+        [JsonIgnore]
+        public MailMeUpUser? MailMeUpUser { get; set; }
     }
 }

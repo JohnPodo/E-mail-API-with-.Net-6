@@ -1,4 +1,5 @@
 ﻿using Models;
+using Models.Responses;
 using Repos;
 using System;
 using System.Collections.Generic;
@@ -28,6 +29,81 @@ namespace CustomHandlers
             model.ProcessSession = _ProcessSession;
             model.InsertDate = DateTime.Now;
             await _Repo.AddToLog(model);
+        }
+
+        public async Task<LogResponse> GetAllLogs()
+        {
+            try
+            {
+                var logs = await _Repo.GetAllLogs();
+                return new LogResponse() { Success = true, ErrorMessage = String.Empty, Logs = logs };
+
+            }
+            catch (Exception ex)
+            {
+                await WriteToLog($"Exception caught in GetAllLogs of handler with message \n Message -> {ex.Message}", Severity.Exception);
+                return new LogResponse() { Success = false, ErrorMessage = "Error on handling request",Logs = null };
+            }
+        }
+
+        public async Task<LogResponse> GetSessionsWithException()
+        {
+            try
+            {
+                var logs = await _Repo.GetSessionsWithException();
+                return new LogResponse() { Success = true, ErrorMessage = String.Empty, Logs = logs };
+
+            }
+            catch (Exception ex)
+            {
+                await WriteToLog($"Exception caught in GetAllLogs of handler with message \n Message -> {ex.Message}", Severity.Exception);
+                return new LogResponse() { Success = false, ErrorMessage = "Error on handling request", Logs = null };
+            }
+        }
+
+        public async Task<LogResponse> GetAllLogsOfSession(Guid processSession)
+        {
+            try
+            {
+                var logs = await _Repo.GetAllLogsOfSession(processSession);
+                return new LogResponse() { Success = true, ErrorMessage = String.Empty, Logs = logs };
+
+            }
+            catch (Exception ex)
+            {
+                await WriteToLog($"Exception caught in GetAllLogsOfSession of handler with message \n Message -> {ex.Message}", Severity.Exception);
+                return new LogResponse() { Success = false, ErrorMessage = "Error on handling request", Logs = null };
+            }
+        }
+
+        public async Task<BaseResponse> DeleteAllLogsOfSession(Guid processSession)
+        {
+            try
+            {
+                await _Repo.DeleteAllLogsOfSession(processSession);
+                return new BaseResponse() { Success = true, ErrorMessage = String.Empty };
+
+            }
+            catch (Exception ex)
+            {
+                await WriteToLog($"Exception caught in GetAllLogsOfSession of handler with message \n Message -> {ex.Message}", Severity.Exception);
+                return new BaseResponse() { Success = false, ErrorMessage = "Error on handling request" };
+            }
+        }
+
+        public async Task<BaseResponse> DeleteAllLogs()
+        {
+            try
+            {
+                await _Repo.DeleteAllLogs();
+                return new BaseResponse() { Success = true, ErrorMessage = String.Empty };
+
+            }
+            catch (Exception ex)
+            {
+                await WriteToLog($"Exception caught in GetAllLogsOfSession of handler with message \n Message -> {ex.Message}", Severity.Exception);
+                return new BaseResponse() { Success = false, ErrorMessage = "Error on handling request" };
+            }
         }
     }
 }

@@ -8,49 +8,50 @@ namespace Repos
     {
          public async Task AddToLog(LogMeUp model)
         {
-            await _DbContext.Logs.AddAsync(model);
+            await _DbContext.MailMeUpUserLogs.AddAsync(model);
             await _DbContext.SaveChangesAsync();    
         }
 
-        public async Task DeleteToLog(LogMeUp model)
+        public async Task DeleteLog(LogMeUp model)
         {
-            var logToDel = await _DbContext.Logs.Where(l => l.Id == model.Id).FirstOrDefaultAsync();
+            var logToDel = await _DbContext.MailMeUpUserLogs.Where(l => l.Id == model.Id).FirstOrDefaultAsync();
             if (logToDel is null)
                 return;
-            _DbContext.Logs.Remove(logToDel);
+            _DbContext.MailMeUpUserLogs.Remove(logToDel);
             await _DbContext.SaveChangesAsync();
         }
 
         public async Task<List<LogMeUp>> GetAllLogs()
         {
-            return await _DbContext.Logs.ToListAsync();
+            return await _DbContext.MailMeUpUserLogs.ToListAsync();
         }
 
-        public async Task<List<LogMeUp>> GetAllLogsOfSession(string processSession)
+        public async Task<List<LogMeUp>> GetAllLogsOfSession(Guid processSession)
         {
-            if (string.IsNullOrEmpty(processSession))
+            if (processSession == Guid.Empty)
                 return null;
-            var logs = await _DbContext.Logs.Where(l => l.ProcessSession.ToString() == processSession).ToListAsync();
+            var logs = await _DbContext.MailMeUpUserLogs.Where(l => l.ProcessSession == processSession).ToListAsync();
             return logs;
         }
 
-        public async Task DeleteAllLogsOfSession(string processSession)
+        public async Task DeleteAllLogsOfSession(Guid processSession)
         {
-            if (string.IsNullOrEmpty(processSession))
+            if (processSession == Guid.Empty)
                 return;
             var logs = await GetAllLogsOfSession(processSession);
-            logs.ForEach(async l => await DeleteToLog(l));
+            logs.ForEach(async l => await DeleteLog(l));
         }
 
-        public async Task<List<List<LogMeUp>>> GetSessionsWithException()
+        public async Task<List<LogMeUp>> GetSessionsWithException()
         {
-            var listOfLogsWithException = await _DbContext.Logs.Where(s=>s.Severity == Severity.Exception).ToListAsync();
-            var data = new List<List<LogMeUp>>();
-            foreach (var log in listOfLogsWithException)
-            {
-                data.Add(await GetAllLogsOfSession(log.ProcessSession.ToString()));
-            }
-            return data;
+            var listOfLogsWithException = await _DbContext.MailMeUpUserLogs.Where(s=>s.Severity == Severity.Exception).ToListAsync();
+            return listOfLogsWithException;
+        }
+
+        public async Task DeleteAllLogs()
+        {
+            _DbContext.MailMeUpUserLogs.RemoveRange(_DbContext.MailMeUpUserLogs); 
+            await _DbContext.SaveChangesAsync();
         }
     }
 }
