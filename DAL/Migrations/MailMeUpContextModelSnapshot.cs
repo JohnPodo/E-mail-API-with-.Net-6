@@ -26,9 +26,6 @@ namespace DAL.Migrations
                     b.Property<DateTime>("InsertDate")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("MailMeUpUserId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("Message")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -40,8 +37,6 @@ namespace DAL.Migrations
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("MailMeUpUserId");
 
                     b.ToTable("MailMeUpUserLogs");
                 });
@@ -81,15 +76,6 @@ namespace DAL.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("MailMeUpUsers");
-                });
-
-            modelBuilder.Entity("Models.LogMeUp", b =>
-                {
-                    b.HasOne("Models.MailMeUpUser", "MailMeUpUser")
-                        .WithMany()
-                        .HasForeignKey("MailMeUpUserId");
-
-                    b.Navigation("MailMeUpUser");
                 });
 #pragma warning restore 612, 618
         }

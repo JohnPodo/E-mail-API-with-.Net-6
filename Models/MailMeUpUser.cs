@@ -12,7 +12,7 @@ namespace Models
     {
         public int Id { get; set; }
 
-        public string Username { get; set; } 
+        public string Username { get; set; }
         [JsonIgnore]
         public string Password { get; set; }
         public bool IsAdmin { get; set; }
@@ -20,7 +20,6 @@ namespace Models
         [JsonIgnore]
         public string EmailPassword { get; set; }
         public string EmailAddress { get; set; }
-        public Guid? ActiveToken { get; set; }
-
+        public Guid? ActiveToken { get; set; } 
     }
 }

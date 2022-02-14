@@ -5,6 +5,10 @@ namespace Dtos
 {
     public class MailMeUpAttachmentDto
     {
+        public MailMeUpAttachmentDto()
+        {
+
+        }
         public MailMeUpAttachmentDto(string content, string titleWithExtension, bool isItBase64)
         {
             var extension = Path.GetExtension(titleWithExtension);
@@ -25,8 +29,8 @@ namespace Dtos
         }
 
 
-        public string Base64Content { get; }
-        public string TitleWithExtension { get; }
+        public string Base64Content { get; set; }
+        public string TitleWithExtension { get; set; }
         public void IsBase64(string base64String)
         {
             if (!Regex.IsMatch(base64String, @"^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{4})$") || base64String.Length % 4 != 0)

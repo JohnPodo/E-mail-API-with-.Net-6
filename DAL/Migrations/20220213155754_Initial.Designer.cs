@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAL.Migrations
 {
     [DbContext(typeof(MailMeUpContext))]
-    [Migration("20220212152659_Users")]
-    partial class Users
+    [Migration("20220213155754_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -28,9 +28,6 @@ namespace DAL.Migrations
                     b.Property<DateTime>("InsertDate")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("MailMeUpUserId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("Message")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -43,8 +40,6 @@ namespace DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("MailMeUpUserId");
-
                     b.ToTable("MailMeUpUserLogs");
                 });
 
@@ -54,7 +49,7 @@ namespace DAL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<Guid>("ActiveToken")
+                    b.Property<Guid?>("ActiveToken")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("EmailAddress")
@@ -83,15 +78,6 @@ namespace DAL.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("MailMeUpUsers");
-                });
-
-            modelBuilder.Entity("Models.LogMeUp", b =>
-                {
-                    b.HasOne("Models.MailMeUpUser", "MailMeUpUser")
-                        .WithMany()
-                        .HasForeignKey("MailMeUpUserId");
-
-                    b.Navigation("MailMeUpUser");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,4 +1,5 @@
-﻿using Dtos;
+﻿using CustomHandlers;
+using Dtos;
 using Microsoft.AspNetCore.Mvc;
 using Models.Responses;
 using Newtonsoft.Json;
@@ -8,18 +9,13 @@ namespace MailMeUp.Controllers
 { 
     public class MailMeUpController : SuperController
     {
-        // GET: api/<MailMeUpController>
-        [HttpGet]
-        public async Task<IEnumerable<string>> Get()
-        {
-            
-            return new string[] { "value1", "value2" };
-        }
-
-        // GET api/<MailMeUpController>/5
+        
         [HttpPost]
         public async Task<ActionResult<EmailResponse>> SendEmail(MailDto dto)
         {
+            EmailHandler handler = new EmailHandler();
+            var authCheck = await CheckAuth(false, false);
+            if (authCheck is not null) return authCheck;
             await WriteRequestInfoToLog(dto);
             if (dto is null)
                 return new BadRequestObjectResult(new EmailResponse() { Success = false, ErrorMessage = "No Data was given" });
@@ -27,25 +23,9 @@ namespace MailMeUp.Controllers
                 return new BadRequestObjectResult(new EmailResponse() { Success = false, ErrorMessage = "No Receiver was provided" });
             if (dto.To.Count == 0)
                 return new BadRequestObjectResult(new EmailResponse() { Success = false, ErrorMessage = "No Receiver was provided" });
-            return null;
+            var result = handler.SendEmail(dto, _UserHandler._SessionUser);
+            return result;
         }
-
-        // POST api/<MailMeUpController>
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
-
-        // PUT api/<MailMeUpController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<MailMeUpController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
+         
     }
 }

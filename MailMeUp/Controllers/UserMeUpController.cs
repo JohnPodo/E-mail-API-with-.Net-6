@@ -13,7 +13,7 @@ namespace MailMeUp.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<UserResponse>> GetUserById(int id)
         {
-            var authCheck = await CheckAuth(true);
+            var authCheck = await CheckAuth(true,true);
             if (authCheck is not null) return authCheck;
             await WriteRequestInfoToLog(id);
             var result = await _UserHandler.GetUserById(id);
@@ -24,7 +24,7 @@ namespace MailMeUp.Controllers
         [HttpGet("{session}")]
         public async Task<ActionResult<UserResponse>> GetUserByActiveSession(Guid session)
         {
-            var authCheck = await CheckAuth(true);
+            var authCheck = await CheckAuth(true,true);
             if (authCheck is not null) return authCheck;
             await WriteRequestInfoToLog(session);
             var result = await _UserHandler.GetUserByActiveToken(session);
@@ -35,7 +35,7 @@ namespace MailMeUp.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<BaseResponse>> DeleteUser(int id)
         {
-            var authCheck = await CheckAuth(true);
+            var authCheck = await CheckAuth(true,true);
             if (authCheck is not null) return authCheck;
             await WriteRequestInfoToLog(id);
             var result = await _UserHandler.DeleteUser(id);
@@ -55,7 +55,7 @@ namespace MailMeUp.Controllers
         [HttpPost]
         public async Task<ActionResult<BaseResponse>> RegisterAdmin(UserDto dto)
         {
-            var authCheck = await CheckAuth(true);
+            var authCheck = await CheckAuth(true,true);
             if (authCheck is not null) return authCheck;
             await WriteRequestInfoToLog(dto);
             var result = await _UserHandler.RegisterAdmin(dto);
@@ -75,8 +75,8 @@ namespace MailMeUp.Controllers
         [HttpPost]
         public async Task<ActionResult<BaseResponse>> ChangePassword(ChangePasswordDto dto)
         {
-            var authCheck1 = await CheckAuth(false);
-            var authCheck2 = await CheckAuth(true);
+            var authCheck = await CheckAuth(false, true);
+            if (authCheck is not null) return authCheck;
             await WriteRequestInfoToLog(dto);
             var result = await _UserHandler.ChangePassword(dto);
             await WriteResponseInfoToLog(result);

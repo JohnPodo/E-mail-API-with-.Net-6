@@ -18,10 +18,6 @@ namespace Models
 
         public string Message { get; set; }
 
-        public DateTime InsertDate { get; set; }
-        [ForeignKey("MailMeUpUser")]
-        public int? MailMeUpUserId { get; set; }
-        [JsonIgnore]
-        public MailMeUpUser? MailMeUpUser { get; set; }
+        public DateTime InsertDate { get; set; }   
     }
 }

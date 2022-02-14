@@ -33,8 +33,7 @@ namespace CustomHandlers
             model.Message = message;
             model.Severity = severity;
             model.ProcessSession = _ProcessSession;
-            model.InsertDate = DateTime.Now;
-            model.MailMeUpUser = _user;
+            model.InsertDate = DateTime.Now;   
             await _Repo.AddToLog(model);
         }
 
@@ -102,7 +101,7 @@ namespace CustomHandlers
         {
             try
             {
-                await _Repo.DeleteAllLogs();
+                await _Repo.DeleteAllLogs(); 
                 return new BaseResponse() { Success = true, ErrorMessage = String.Empty };
 
             }

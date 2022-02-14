@@ -21,14 +21,26 @@ namespace MailMeUp.Controllers
 
         }
 
-        protected async Task<UnauthorizedResult> CheckAuth(bool mustBeAdmin)
+        protected async Task<UnauthorizedResult> CheckAuth(bool mustBeAdmin, bool validateRole)
         {
             if (this.Request.Headers.ContainsKey("token"))
-                token = new Guid(this.Request.Headers.Where(s => s.Key == "token").FirstOrDefault().Value);
+            {
+                try
+                {
+
+                    token = new Guid(this.Request.Headers.Where(s => s.Key == "token").FirstOrDefault().Value);
+                }
+                catch
+                {
+                    return Unauthorized();
+                }
+            }  
             else token = null;
             if (token is null) return Unauthorized();
             if (!token.HasValue) return Unauthorized();
-            if (!await _UserHandler.GetSessionUser(token.Value, mustBeAdmin)) return Unauthorized();
+            var check = await _UserHandler.GetSessionUser(token.Value, mustBeAdmin);
+            if (validateRole)
+                if (!check) return Unauthorized();
             await _LogHandler.AddUserToLog(_UserHandler._SessionUser);
             return null;
         }

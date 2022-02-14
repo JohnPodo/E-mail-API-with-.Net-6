@@ -1,5 +1,6 @@
 ﻿using CustomValidations;
 using Dtos;
+using Models;
 using Models.Responses;
 using System.Net;
 using System.Net.Mail;
@@ -13,7 +14,7 @@ namespace CustomHandlers
         {
             validator = new MailDtoValidator();
         }
-        public EmailResponse SendEmail(MailDto mail)
+        public EmailResponse SendEmail(MailDto mail,MailMeUpUser user)
         {
             try
             {
@@ -22,7 +23,7 @@ namespace CustomHandlers
                     return firstCheck;
                 MailMessage message = new MailMessage();
                 SmtpClient smtp = new SmtpClient();
-                message.From = GetFromMailAddress();
+                message.From = GetFromMailAddress(user);
                 mail.To.ForEach(to=>message.To.Add(to));
                 message.Subject = mail.Subject;
                 message.IsBodyHtml = mail.IsBodyHtml;
@@ -38,7 +39,7 @@ namespace CustomHandlers
                 smtp.Host = "smtp.gmail.com";
                 smtp.EnableSsl = true;
                 smtp.UseDefaultCredentials = false;
-                var creds = GetCredentials();
+                var creds = GetCredentials(user);
                 if (creds is null)
                     return new EmailResponse() { Success = false, ErrorMessage = "Could not create credentials" };
                 smtp.Credentials = creds;
@@ -71,20 +72,18 @@ namespace CustomHandlers
             return attachments;
         }
 
-        private NetworkCredential GetCredentials()
-        {
-            //ToDo:Username and password to come from sqllite
-            var username = "xxxx";
-            var password = "xxxx";
+        private NetworkCredential GetCredentials(MailMeUpUser user)
+        { 
+            var username = user.EmailUsername;
+            var password = user.EmailPassword;
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
                 return null;
             return new NetworkCredential(username, password);
         }
 
-        private MailAddress GetFromMailAddress()
-        {
-            //ToDo:Must come from sqlLite
-            string mailAddress = "xxxx";
+        private MailAddress GetFromMailAddress(MailMeUpUser user)
+        { 
+            string mailAddress = user.EmailAddress;
             return new MailAddress(mailAddress);
         }
     }
