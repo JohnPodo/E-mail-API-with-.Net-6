@@ -1,0 +1,414 @@
+{
+	"info": {
+		"_postman_id": "4be91264-32d7-4595-a2f1-826b5b335015",
+		"name": "MailMeUp",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "LogMeUp",
+			"item": [
+				{
+					"name": "GetAllLogs",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "032d3b02-e4c2-49cf-b38c-79e044329f09",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/LogMeUp/GetAllLogs",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"LogMeUp",
+								"GetAllLogs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetSessionsWithException",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "819dbac9-36a7-4a60-a7e8-abda0e4922b1",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/LogMeUp/GetSessionsWithException",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"LogMeUp",
+								"GetSessionsWithException"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteAllLogs",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "388e9764-e45e-42ab-b208-5cbd6e9cfe52",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/LogMeUp/DeleteAllLogs",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"LogMeUp",
+								"DeleteAllLogs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllLogsOfSession",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/LogMeUp/GetAllLogsOfSession/121",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"LogMeUp",
+								"GetAllLogsOfSession",
+								"121"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteAllLogsOfSession",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/LogMeUp/DeleteAllLogsOfSession/121",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"LogMeUp",
+								"DeleteAllLogsOfSession",
+								"121"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "UserMeUp",
+			"item": [
+				{
+					"name": "GetUserById",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/UserMeUp/GetUserById/121",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"UserMeUp",
+								"GetUserById",
+								"121"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetUserByActiveSession",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/UserMeUp/GetUserByActiveSession/121",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"UserMeUp",
+								"GetUserByActiveSession",
+								"121"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteUser",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "ddd12b01-6a3a-45a2-88a2-8ede709ad02f",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/UserMeUp/DeleteUser/2",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"UserMeUp",
+								"DeleteUser",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "RegisterUser",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"string\",\r\n  \"password\": \"string\",\r\n  \"emailUsername\": \"string\",\r\n  \"emailPassword\": \"string\",\r\n  \"emailAddress\": \"string\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/UserMeUp/RegisterUser",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"UserMeUp",
+								"RegisterUser"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ChangePassword",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"oldPassword\": \"string\",\r\n  \"newPassword\": \"string\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/UserMeUp/ChangePassword",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"UserMeUp",
+								"ChangePassword"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "RegisterAdmin",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"string\",\r\n  \"password\": \"string\",\r\n  \"emailUsername\": \"string\",\r\n  \"emailPassword\": \"string\",\r\n  \"emailAddress\": \"string\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/UserMeUp/RegisterAdmin",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"UserMeUp",
+								"RegisterAdmin"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "SendEmail",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "5fd8ac58-e83b-4ca5-be6f-343cddeaa0de",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"to\": [\"\"],\r\n    \"subject\": \"Test\",\r\n    \"body\": \"<p>Test</p>\",\r\n    \"isBodyHtml\": true,\r\n    \"attachments\": [ \r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/MailMeUp/SendEmail",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"MailMeUp",
+						"SendEmail"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Username\" :\"Boss\",\r\n    \"Password\" :\"XXX\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/UserMeUp/Login",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"UserMeUp",
+						"Login"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://localhost:7101"
+		}
+	]
+}
