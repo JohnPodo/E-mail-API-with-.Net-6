@@ -1,20 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Net;
 
 namespace MailMeUpLib
 {
     public class BaseResult<T> where T : class
     {
-        public BaseResult(bool IsSuccesfull,string errorMsg,HttpStatusCode code,T Data)
+        public BaseResult(bool IsSuccesfull,string errorMsg,HttpStatusCode code,T data)
         {
             Success = IsSuccesfull;
             ErrorMessage = errorMsg;
             StatusCode = code;
-            Data = Data;
+            Data = data;
         }
         public bool Success { get; set; }
         public string? ErrorMessage { get; set; }
