@@ -35,8 +35,7 @@ namespace CustomHandlers
             try
             {
                 var user = await _Repo.GetUserByActiveToken(sessionToken);
-                if (user is null) return new UserResponse() { Success = false, ErrorMessage = "No User Found" };
-                await EraseToken();
+                if (user is null) return new UserResponse() { Success = false, ErrorMessage = "No User Found" }; 
                 return new UserResponse() { Success = true, User = user };
             }
             catch (Exception ex)
@@ -52,8 +51,7 @@ namespace CustomHandlers
             try
             {
                 var user = await _Repo.GetUserById(id);
-                if (user is null) return new UserResponse() { Success = false, ErrorMessage = "No User Found" };
-                await EraseToken();
+                if (user is null) return new UserResponse() { Success = false, ErrorMessage = "No User Found" }; 
                 return new UserResponse() { Success = true, User = user };
             }
             catch (Exception ex)
@@ -100,8 +98,7 @@ namespace CustomHandlers
                     EmailUsername = dto.EmailUsername,
                     IsAdmin = true
                 };
-                await _Repo.AddUser(userToAdd);
-                await EraseToken();
+                await _Repo.AddUser(userToAdd); 
                 return new BaseResponse() { Success = true, ErrorMessage = "" };
             }
             catch (Exception ex)
@@ -117,8 +114,7 @@ namespace CustomHandlers
             try
             {
                  
-                await _Repo.DeleteUser(id);
-                await EraseToken();
+                await _Repo.DeleteUser(id); 
                 return new BaseResponse() { Success = true, ErrorMessage = "" };
             }
             catch (Exception ex)
@@ -150,12 +146,23 @@ namespace CustomHandlers
             }
         }
 
-        public async Task EraseToken()
+        public async Task<BaseResponse> Logout()
         {
-            if(_SessionUser.ActiveToken is not null){
-                _SessionUser.ActiveToken = null;
-                await _Repo.UpdateUser(_SessionUser);
+            try
+            {
+                if (_SessionUser.ActiveToken is not null)
+                {
+                    _SessionUser.ActiveToken = null;
+                    await _Repo.UpdateUser(_SessionUser);
+                }
+                return new BaseResponse() { Success = true };
             }
+            catch(Exception ex)
+            {
+                await _LogHandler.WriteToLog($"Exception Caught in Logout with message {ex.Message}", Severity.Exception); 
+                return new BaseResponse() { Success = false, ErrorMessage = "Error on process" };
+            }
+            
         }
 
         public async Task<BaseResponse> ChangePassword(ChangePasswordDto dto)

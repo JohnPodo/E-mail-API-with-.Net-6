@@ -363,7 +363,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"Username\" :\"Boss\",\r\n    \"Password\" :\"XXX\"\r\n}",
+					"raw": "{\r\n    \"Username\" :\"Boss\",\r\n    \"Password\" :\"Boss\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -379,6 +379,40 @@
 						"api",
 						"UserMeUp",
 						"Login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Logout",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/UserMeUp/Logout",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"UserMeUp",
+						"Logout"
 					]
 				}
 			},

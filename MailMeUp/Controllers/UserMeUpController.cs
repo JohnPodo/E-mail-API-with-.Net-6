@@ -71,6 +71,15 @@ namespace MailMeUp.Controllers
             await WriteResponseInfoToLog(result);
             return Ok(result);
         }
+        public async Task<ActionResult<LoginResponse>> Logout()
+        {
+            var authCheck = await CheckAuth(false, false);
+            if (authCheck is not null) return authCheck;
+            await WriteRequestInfoToLog<object>(null);
+            var result = await _UserHandler.Logout();
+            await WriteResponseInfoToLog(result);
+            return Ok(result);
+        }
 
         [HttpPost]
         public async Task<ActionResult<BaseResponse>> ChangePassword(ChangePasswordDto dto)

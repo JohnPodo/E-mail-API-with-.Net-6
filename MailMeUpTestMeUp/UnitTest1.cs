@@ -16,7 +16,7 @@ namespace MailMeUpTestMeUp
         [InlineData("Boss", "Boss", true)]
         [InlineData("", "", false)]
         [InlineData("BossWrong", "BossWrong", false)]
-        public async Task Login(string username, string password, bool correctCreds)
+        public async Task LoginAndLogout(string username, string password, bool correctCreds)
         {
             var result = await _lib.User.Login(new Dtos.LoginDto() { Username = username, Password = password });
             if (correctCreds)

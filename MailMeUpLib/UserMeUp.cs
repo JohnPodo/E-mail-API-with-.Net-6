@@ -141,5 +141,23 @@ namespace MailMeUpLib
                 return new BaseResult<LoginResponse>(false, ex.Message, HttpStatusCode.OK, null);
             }
         }
+
+        public async Task<BaseResult<BaseResponse>> Logout(string token)
+        {
+            try
+            {
+                var client = new RestClient(_Url);
+                var request = ConstructRequest<object>(Method.Post, $"/api/UserMeUp/Logout", token, null);
+                var response = await client.ExecuteAsync<BaseResponse>(request);
+                if (response is null)
+                    return new BaseResult<BaseResponse>(false, "Response came back null", HttpStatusCode.NoContent, null);
+                var result = new BaseResult<BaseResponse>(response.IsSuccessful, response.ErrorMessage, response.StatusCode, response.Data);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                return new BaseResult<BaseResponse>(false, ex.Message, HttpStatusCode.OK, null);
+            }
+        }
     }
 }

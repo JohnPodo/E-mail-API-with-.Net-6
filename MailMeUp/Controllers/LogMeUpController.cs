@@ -12,8 +12,7 @@ namespace MailMeUp.Controllers
         {
             var authCheck = await CheckAuth(true,true);
             if (authCheck is not null) return authCheck;
-            var response = await _LogHandler.GetAllLogs();
-            await _UserHandler.EraseToken();
+            var response = await _LogHandler.GetAllLogs(); 
             await WriteRequestInfoToLog<object>(null);
             await WriteResponseInfoToLog(response);
             return response;
@@ -25,7 +24,7 @@ namespace MailMeUp.Controllers
             var authCheck = await CheckAuth(true, true);
             if (authCheck is not null) return authCheck;
             var response = await _LogHandler.GetSessionsWithException();
-            await _UserHandler.EraseToken();
+            
             await WriteRequestInfoToLog<object>(null);
             await WriteResponseInfoToLog(response);
             return response;
@@ -37,7 +36,7 @@ namespace MailMeUp.Controllers
             var authCheck = await CheckAuth(true, true);
             if (authCheck is not null) return authCheck;
             var response = await _LogHandler.DeleteAllLogs();
-            await _UserHandler.EraseToken();
+            
             await WriteRequestInfoToLog<object>(null);
             await WriteResponseInfoToLog(response);
             return response;
@@ -49,7 +48,7 @@ namespace MailMeUp.Controllers
             var authCheck = await CheckAuth(true, true);
             if (authCheck is not null) return authCheck;
             var response = await _LogHandler.GetAllLogsOfSession(processSession);
-            await _UserHandler.EraseToken();
+            
             await WriteRequestInfoToLog(processSession);
             await WriteResponseInfoToLog(response);
             return response;
@@ -61,7 +60,7 @@ namespace MailMeUp.Controllers
             var authCheck = await CheckAuth(true, true);
             if (authCheck is not null) return authCheck;
             var response = await _LogHandler.DeleteAllLogsOfSession(processSession);
-            await _UserHandler.EraseToken();
+            
             await WriteRequestInfoToLog(processSession);
             await WriteResponseInfoToLog(response);
             return response;
