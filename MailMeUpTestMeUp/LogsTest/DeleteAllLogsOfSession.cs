@@ -47,10 +47,10 @@ namespace MailMeUpTestMeUp.LogsTest
                             Assert.Equal(correctCreds, string.IsNullOrWhiteSpace(response.Data.ErrorMessage));
                             Assert.Equal(correctCreds, response.Data.Logs is not null);
                         }
-                    }
-                    var logoutResult = await Logout(token);
-                    Assert.Equal(!string.IsNullOrEmpty(token), logoutResult);
+                    } 
                 }
+                var logoutResult = await Logout(token);
+                Assert.Equal(!string.IsNullOrEmpty(token), logoutResult);
             }
         }
     }

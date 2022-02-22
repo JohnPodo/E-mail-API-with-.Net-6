@@ -18,12 +18,11 @@ namespace Dtos
                 throw new MailMeUpException("Content of attachment cannot be null or empty");
             if (string.IsNullOrWhiteSpace(titleWithExtension))
                 throw new MailMeUpException("Title of attachment cannot be null or empty");
-            if (isItBase64)
+            if (!isItBase64)
                 Base64Content = content;
             else
                 Base64Content = DecodeRawContent(content);
 
-            IsBase64(Base64Content);
 
             TitleWithExtension = titleWithExtension;
         }
@@ -47,6 +46,7 @@ namespace Dtos
         }
         private string DecodeRawContent(string content)
         {
+            IsBase64(content);
             byte[] data = System.Convert.FromBase64String(content);
             var base64Decoded = System.Text.ASCIIEncoding.ASCII.GetString(data);
             return base64Decoded;
